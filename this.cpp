@@ -22,11 +22,14 @@ class Persona {
     ~Persona() {
         cout << "destructor" << endl;
     }
-    void establecerNombre(string nombre){
+    //Se utiliza amperson para regresar el apuntador de la memoria
+    Persona &establecerNombre(string nombre){
         this -> nombre = nombre;
+        return *this;
     }
-    void establecerEdad(int edad){
+    Persona &establecerEdad(int edad){
         this -> edad = edad;
+        return *this;
     }
     //los metodos se declaran como funciones
     void saludar () {
@@ -42,7 +45,7 @@ int main(){
     Persona *p = new Persona("Nala", 24);
     Persona *p2 = new Persona("Erick", 29);
 
-    p -> establecerNombre("Ale");
+    p -> establecerNombre("Ale").establecerEdad(30).establecerNombre("Nala");
 
     p -> saludar();
     p2 -> saludar();
