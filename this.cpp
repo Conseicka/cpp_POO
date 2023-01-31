@@ -65,5 +65,6 @@ int main(){
     p -> saludar();
 
     p2 -> saludar();
+    
     cout << "Numero de personas: " << Persona::numero_personas << endl;
 };

@@ -1,3 +1,6 @@
+//Polimorfismo: Es la caracteristica que permite a objetos de diferentes clases intercambiar mensajes
+//con una misma estructura
+
 // herencia es la capacidad de una clase de heredar caracteristicas a una o mas clases
 #include <iostream>
 #include <string>
@@ -20,9 +23,9 @@ public:
     {
         return alimento;
     }
-    void comer()
+    void comer(Animal *a)
     {
-        cout << "Este animal esta comiendo " << alimento << " ñumñum" << endl;
+        cout << "Este animal esta comiendo " << a -> alimento << " ñumñum" << endl;
     }
 };
 
@@ -75,17 +78,37 @@ public:
         cout << "Este animal esta cazando" << endl;
     }
 };
+//En la definicionde la clase tanto como en su constructor, tienen que definirse las clases que va a heredar
+class Omnivoro : public Herviboro, public Carnivoro {
+public:
+    Omnivoro() : Herviboro(), Carnivoro() {}
+    void comer(){
+        cout << "Este animal comoe lo quesea" << endl;
+    }
+
+
+
+};
 int main()
 {
 
     Animal *a = new Animal();
     Herviboro *h = new Herviboro();
     Carnivoro *c = new Carnivoro();
+    Omnivoro *o = new Omnivoro();
 
     cout << "Numero de Animales: " << Animal::obtenerNumeroAnimales() << endl;
 
-    a->comer();
-    c->cazar();
+    //a -> comer();
+    
+    c -> cazar();
+    a -> comer(c);
+    a -> comer(h);
+    cout << "humano:" << endl;
+    //con la siguiente sintaxis tiene ambiguedad, por eso se tiene que especificar la clase de metodo que va a usar
+    o -> Carnivoro::comer(c); 
+    //con esta sintaxis se reescriben los metodos de las clases que hereda y se elimina la ambiguedad
+    o -> comer();
 
     delete a;
 
